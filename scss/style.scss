@@ -295,7 +295,7 @@ body{
       // ---------------- CARTELES ----------------
         #dificult{
             @include printScreen(23px);
-            display: none;
+            //display: none;
 
             @include mediaQ(sm){
                 font-size: 15px;
