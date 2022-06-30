@@ -143,7 +143,7 @@ body{
         position: relative;
 
         @include mediaQ(md){
-            height: 70%;
+            height: 100%;
             padding: 50px 50px;
         }
         @include mediaQ(sm){
@@ -335,6 +335,7 @@ body{
                     @include mediaQ(sm){
                         font-size: 13px;
                         padding: 3px 20px;
+                        margin-bottom: 7px;
                     }
                     @include mediaQ(xsm){
                         font-size: 12px;
@@ -470,10 +471,12 @@ body{
             }
             button{
                 margin-right: 15px;
+                margin-bottom: 10px;
                 @include buttonWhite(18px);
                 @include mediaQ(xsm){
                     font-size: 11px;
                     padding: 3px 10px;
+                    margin-bottom: 7px;
                 }
             }
             button:hover{
