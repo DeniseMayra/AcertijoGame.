@@ -9,14 +9,14 @@ let winners = []
 let winner = false
 
 // --------------------------- RANDOM ---------------------------
-function randomNum(){
+function randomNum(){   
     let i=0
     while(i<4){
         let oneNumber = Math.floor(Math.random()*10)
 
         correct[i] = oneNumber
         let j=0
-        while(j<i){
+        while(j<i){     //verifica que no se repita 
             if(correct[i]==correct[j]){
                 oneNumber = Math.floor(Math.random()*10)
                 correct[i] = oneNumber
@@ -29,10 +29,6 @@ function randomNum(){
 }
 
 // --------------------------- DIFICULTAD ---------------------------
-/* let againB = document.querySelectorAll(".again")
-for(let buton of againB){
-    buton.addEventListener('click', againFn);
-} */
 document.getElementById('againW').addEventListener('click', againFn);
 document.getElementById('againL').addEventListener('click', againFn);
 
@@ -135,8 +131,10 @@ function hideTable(){
 
 // --------------------------- GAME OVER ---------------------------
 function youWin(){
-    winner = true
+    winner = true       //flag para que en again limpie
     dificultScreen.style.display ='none'
+
+    //imprimo el tiempo que tardo
     time = end - start
     sec = Math.floor(time/1000)
     min = Math.floor(time/60000)
@@ -151,8 +149,9 @@ function youWin(){
     paragh.innerHTML = `Ganaste el Juego en ${hour}:${min}:${sec}`
     winContainer.prepend(paragh)
      
-    winContainer.style.display='flex'
+    winContainer.style.display='flex'   //muestro cartel
     
+    // guardo nueva fila en local storage
     let win = {
         name: userName,
         totalTime: time,
@@ -165,7 +164,8 @@ function youWin(){
 }
 function youLose(){
     document.getElementById('lost').style.display='flex'
-    let num = correct.join("")
+    // imprimo el numero correcto 
+    let num = correct.join("")  //join para concatenar el array con "" entre medio
     let correctNumber = document.getElementById('correctNum')
     let paragh = document.createElement("span")
     paragh.innerHTML= `${num}`
@@ -177,11 +177,12 @@ function analyze(num){
     intentos++
     let right = 0
     let wrong =0
+    
     for(let i=0;i<4; i++){
-        if(num[i] == correct[i]){
+        if(num[i] == correct[i]){       //analizo bien posicionados 
             right++
         }else{
-            for(let j=0; j<4 ;j++){
+            for(let j=0; j<4 ;j++){     //analizo mal posicionados
                 if(num[i] == correct[j]){
                     wrong++
                 }
@@ -252,12 +253,12 @@ function validate(){
     while(i<4 && validFlag){
         let j=0
         while(j<i && validFlag){
-            if(number.value[i]==number.value[j]){
+            if(number.value[i]==number.value[j]){       //valida si se repite el numero 
                 alert("Ingrese 4 números DISTINTOS")
                 validFlag= false
             }else{j++}
         }
-        if(number.value[i] == null){
+        if(number.value[i] == null){                    //valida si se ingresa menos de 4 numeros 
             alert("Ingrese 4 números DISTINTOS")
             validFlag= false
         }
@@ -271,11 +272,13 @@ function validate(){
 
 // --------------------------- LOCAL STORAGE ---------------------------
 function insertHTML(){
+    // ordena el array de totalTime menor a mayor
     let winnersOrd = winners.sort((c1,c2) => (c1.totalTime>c2.totalTime) ? 1 : (c1.totalTime<c2.totalTime) ? -1 :0)
 
     let id = 0
     let tBody = document.getElementById('tbody')
     
+    //limpia lo que haya
     while(tBody.firstChild){
         tBody.removeChild(tBody.firstChild)
     }
@@ -299,7 +302,7 @@ function insertHTML(){
         tBody.appendChild(tr)
     })
 }
-
+//cuando se refresca la pagina vuelve a analizar el local storage
 window.onload = function(){
     let storageData = JSON.parse(localStorage.getItem('winners'))
     if(storageData){

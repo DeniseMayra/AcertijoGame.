@@ -1,31 +1,55 @@
+// -------------------------- VARIABLES --------------------------
+$black : #11151c;
+$white : #f8f9fa;
+$fontFam : 'BIZ UDGothic', sans-serif;
+
+// -------------------------- MEDIA QUERIS --------------------------
+$breakpoints: ( //mapa
+    xsm: 320px,
+    sm: 540px,
+    md: 768px,
+    lg: 1024px,
+);
+@mixin mediaQ($breakpoint) { 
+    @if map-has-key($breakpoints, $breakpoint) { //analiza si el parametro esta en el mapa
+        @media screen and(max-width: map-get($breakpoints, $breakpoint)) {
+            //argumento: cada valor del mapa predefinido
+            @content;
+        }
+    }@else{
+        @warn "El valor '#{ $breakpoint}' no ha sido declarado como breakpoint"
+    }
+}
+
 *{margin: 0; padding: 0;}
 
+// -------------------------- MIXIN --------------------------
 @mixin buttonBlack($fontSize) {
     padding: 9px 30px;
-    font-family: 'BIZ UDGothic', sans-serif;
+    font-family: $fontFam;
     font-size: $fontSize;
     font-weight: 700;
-    background-color: #11151c;
+    background-color: $black;
     border-color: solid f8f9fa;
-    color: #f8f9fa;
+    color: $white;
     border-width: 2px;
     border-radius: 35px;
     transition: 1s;
 }
 @mixin buttonWhite($fontSize) {
     font-size: $fontSize;
-    font-family: 'BIZ UDGothic', sans-serif;
+    font-family: $fontFam;
     font-weight: 700;
     padding: 3px 30px;
-    background-color: #f8f9fa;
-    color: #11151c;
+    background-color: $white;
+    color: $black;
     border-radius: 35px;
     transition: 1s;
 }
 @mixin buttonWhiteHover {
-    background-color: #11151c;
-    border-color: solid f8f9fa;
-    color: #f8f9fa;
+    background-color: $black;
+    border-color: solid$white;
+    color: $white;
     border-width: 2px;
     border-radius: 35px;
 }
@@ -51,17 +75,19 @@
     padding: 10px 5px;
     width: $widhtPorcent;
     border: 0;
-    border-bottom: 2px solid #f8f9fa;
+    border-bottom: 2px solid $white;
     outline: none;
     background-color: transparent;
-    color: #f8f9fa;
+    color: $white;
     font-size: $fontSize;
-    font-family: 'BIZ UDGothic', sans-serif;
+    font-family: $fontFam;
 }
 
+// -------------------------- CSS --------------------------
 body{
     width: 100%;
 
+    // ---------------- INDEX.HTML ----------------
     #navBox{
         background-image: url("../assets/bg.jpeg");
         height: 100vh;
@@ -73,83 +99,105 @@ body{
         justify-content: flex-start;
         padding-left: 100px;
 
+        @include mediaQ(xsm){
+            height: 450px;
+        }
 
         #welcome{
-            color: #f8f9fa;
-            font-family: 'BIZ UDGothic', sans-serif;
+            color: $white;
+            font-family: $fontFam;
             font-weight: 700;
             font-size: 40px;
             text-align: center;
             display: flex;
             flex-direction: column;
 
+            @include mediaQ(xsm){
+                font-size: 20px;
+            }
+
             button{
                 margin-top: 40px;
                 @include buttonBlack((25px));
+
+                @include mediaQ(xsm){
+                    font-size: 15px;
+                    padding: 3px 12px;
+                    margin-bottom: 7px;
+                }
             }
             button:hover{
-                background-color: #f8f9fa;
-                color: #11151c;
+                background-color: $white;
+                color: $black;
             }
         }
     }
 
+    // ---------------- GAME.HTML ----------------
     main{
         padding: 70px 200px;
-        font-family: 'BIZ UDGothic', sans-serif;
+        font-family: $fontFam;
         font-weight: 400;
-        background-color: #11151c;
-        color: #f8f9fa;
+        background-color: $black;
+        color: $white;
         position: relative;
+
+        @include mediaQ(md){
+            height: 70%;
+            padding: 50px 50px;
+        }
+        @include mediaQ(sm){
+            height: 100%;
+            padding: 30px 10px;
+        }
+        @include mediaQ(xsm){
+            padding: 10px 6px;
+        }
 
         #exit{
             position: absolute;
             top: 30px;
             right: 30px;
             @include buttonBlack(15px);
+
+            @include mediaQ(md){
+                top: 12px;
+                right: 12px;
+                padding: 5px 20px;
+                font-size: 15px;
+            }
+            @include mediaQ(xsm){
+                font-size: 12px;
+                padding: 2px 10px;
+            }
         }
         #exit:hover{
-            background-color: #f8f9fa;
-            color: #11151c;
+            background-color: $white;
+            color: $black;
         }
 
         #description{
             font-size: 23px;
             text-align: center;
             margin-bottom: 50px;
-        }
-        
-        #dificult{
-            @include printScreen(23px);
-            //display: none;
-
-            #userName{
-                @include inputs(30%, 23px);
-                text-align: center;
-                margin-bottom: 60px;
+            @include mediaQ(md){
+                font-size: 18px;
+                margin-top: 25px;
+                margin-bottom: 30px;
             }
-            #difButon{
+            @include mediaQ(sm){
+                font-size: 15px;
+                margin-bottom: 20px;
+            }
+            @include mediaQ(xsm){
                 margin-top: 30px;
-
-                button{
-                    @include buttonWhite(18px);
-                }
-                button:hover{
-                    @include buttonWhiteHover();
-                }
-            }
-            .tableB{
-                margin-top: 40px;
-                @include buttonWhite(18px);
-            }
-            .tableB:hover{
-                @include buttonWhiteHover();
+                font-size: 12px;
+                margin-bottom: 10px;
             }
         }
 
         #information{
             height: 400px;
-            overflow: scroll;
             display: flex;
             flex-direction: column;
             align-items: flex-end;
@@ -157,17 +205,42 @@ body{
             margin-bottom: 50px;
             font-size: 20px;
             font-weight: 400;
-            
+            overflow: scroll;
+
+            @include mediaQ(md){
+                margin-bottom: 30px;
+                font-size: 15px;
+            }
+            @include mediaQ(sm){
+                font-size: 12px;
+                margin-bottom: 8px;
+                height: 350px;
+            }
+            @include mediaQ(xsm){
+                margin-bottom: 5px;
+                font-size: 11px;
+                height: 250px;
+            }
 
             .item{
                 margin-bottom: 20px;
                 width: 100%;
                 display: flex;
 
+                @include mediaQ(sm){
+                    margin-bottom: 8px;
+                }
+                @include mediaQ(xsm){
+                    margin-bottom: 5px;
+                }
+
                 .code{
                     width: 20%;
                     margin-right: 20px;
                     text-align: center;
+                    @include mediaQ(xsm){
+                        margin-right: 7px;
+                    }
                 }
                 .codeInf{
                     width: 80%;
@@ -180,53 +253,206 @@ body{
             .fa-heart{
                 color: #9d0208;
             }
+            @include mediaQ(md){
+                margin-bottom: 40px;
+            }
+            @include mediaQ(xsm){
+                margin-bottom: 10px;
+                font-size: 15px;
+            }
         }
         #inputName{
             @include inputs(20%, 18px);
             margin-right: 50px;
-
+            @include mediaQ(md){
+                width: 35%;
+                font-size: 15px;
+            }
+            @include mediaQ(sm){
+                font-size: 12px;
+            }
+            @include mediaQ(xsm){
+                font-size: 11px;
+                width: 45%
+            }
         }
         #check{
             @include buttonWhite(18px);
+            @include mediaQ(sm){
+                font-size: 13px;
+                padding: 3px 20px;
+            }
+            @include mediaQ(xsm){
+                font-size: 12px;
+                padding: 2px 10px;
+                margin-bottom: 7px;
+            }
         }
         #check:hover{
             @include buttonWhiteHover();
         }
 
+      // ---------------- CARTELES ----------------
+        #dificult{
+            @include printScreen(23px);
+            display: none;
+
+            @include mediaQ(sm){
+                font-size: 15px;
+            }
+            @include mediaQ(xsm){
+                font-size: 15px;
+                justify-content: flex-start;
+                padding-top: 100px;
+            }
+            #userName{
+                @include inputs(30%, 23px);
+                text-align: center;
+                margin-bottom: 60px;
+                @include mediaQ(md){
+                    width: 45%;
+                }
+                @include mediaQ(sm){
+                    font-size: 15px;
+                    margin-bottom: 20px;
+                }
+                @include mediaQ(xsm){
+                    font-size: 12px;
+                    width: 60%;
+                }
+            }
+            #difButon{
+                margin-top: 30px;
+
+                @include mediaQ(sm){
+                    margin-top: 20px;
+                }
+                @include mediaQ(xsm){
+                    margin-top: 15px;
+                }
+                button{
+                    @include buttonWhite(18px);
+                    @include mediaQ(sm){
+                        font-size: 13px;
+                        padding: 3px 20px;
+                    }
+                    @include mediaQ(xsm){
+                        font-size: 12px;
+                        padding: 2px 10px;
+                        margin-bottom: 7px;
+                    }
+                }
+                button:hover{
+                    @include buttonWhiteHover();
+                }
+            }
+            .tableB{
+                margin-top: 40px;
+                @include buttonWhite(18px);
+                @include mediaQ(sm){
+                    font-size: 13px;
+                    padding: 3px 20px;
+                    margin-top: 20px;
+                }
+                @include mediaQ(xsm){
+                    font-size: 12px;
+                    padding: 2px 10px;
+                    margin-bottom: 7px;
+                }
+            }
+            .tableB:hover{
+                @include buttonWhiteHover();
+            }
+            
+        }
         #win{
             @include printScreen(40px);
             display: none;
+            
+            @include mediaQ(sm){
+                font-size: 20px;
+            }
+            @include mediaQ(xsm){
+                font-size: 15px;
+                justify-content: flex-start;
+                padding-top: 100px;
+            }
             p{
                 margin-bottom: 50px;
+                @include mediaQ(sm){
+                    margin-bottom: 20px;
+                }
+                @include mediaQ(xsm){
+                    margin-bottom: 15px
+                }
             }
             button{
                 @include buttonBlack(20px);
-                
+                @include mediaQ(sm){
+                    font-size: 13px;
+                    padding: 3px 20px;
+                    margin-bottom: 10px;
+                }
+                @include mediaQ(xsm){
+                    font-size: 12px;
+                    padding: 2px 10px;
+                    margin-bottom: 7px;
+                }
             }
             button:hover{
-                background-color: #f8f9fa;
-                color: #11151c;
+                background-color: $white;
+                color: $black;
             }
         }
         #lost{
             @include printScreen(40px);
             display: none;
+
+            @include mediaQ(sm){
+                font-size: 20px;
+            }
+            @include mediaQ(xsm){
+                font-size: 15px;
+                justify-content: flex-start;
+                padding-top: 100px;
+            }
             p{
                 margin-bottom: 40px;
+                @include mediaQ(sm){
+                    margin-bottom: 20px;
+                }
+                @include mediaQ(xsm){
+                    margin-bottom: 15px
+                }
             }
             button{
                 @include buttonBlack(20px);
-            
+                @include mediaQ(sm){
+                    font-size: 13px;
+                    padding: 3px 20px;
+                    margin-bottom: 10px;
+                }
+                @include mediaQ(xsm){
+                    font-size: 12px;
+                    padding: 2px 10px;
+                    margin-bottom: 7px;
+                }
             }
             button:hover{
-                background-color: #f8f9fa;
-                color: #11151c;
+                background-color: $white;
+                color: $black;
             }
         }
         #tableContainer{
             @include printScreen(23px);
             display: none;
 
+            @include mediaQ(sm){
+                font-size: 15px;
+            }
+            @include mediaQ(xsm){
+                font-size: 12px;
+            }
             h1{
                 margin-bottom: 40px;
             }
@@ -235,10 +461,20 @@ body{
                 max-height: 400px;
                 overflow: scroll;
                 margin-bottom: 40px;
+                @include mediaQ(sm){
+                    max-height: 300px;
+                }
+                @include mediaQ(xsm){
+                    max-height: 200px;
+                }
             }
             button{
                 margin-right: 15px;
                 @include buttonWhite(18px);
+                @include mediaQ(xsm){
+                    font-size: 11px;
+                    padding: 3px 10px;
+                }
             }
             button:hover{
                 @include buttonWhiteHover();
@@ -246,19 +482,35 @@ body{
         }
     }
     
+    // ---------------- FOOTER ----------------
     footer{
         height: 70px;
-        font-family: 'BIZ UDGothic', sans-serif;
+        font-family: $fontFam;
         font-weight: 400;
-        background-color: #11151c;
-        color: #f8f9fa;
+        background-color: $black;
+        color: $white;
         display: flex;
         justify-content: space-evenly;
         align-items: center;
         .fa-instagram{
-            color: #f8f9fa;
+            color: $white;
             font-size: 20px;
+            @include mediaQ(xsm){
+                font-size: 11px;
+            }
+        }
+        @include mediaQ(md){
+            font-size: 12px;
+        }
+        @include mediaQ(sm){
+            font-size: 10px;
+            height: 50px;
+        }
+        @include mediaQ(xsm){
+            font-size: 11px;
+            height: 40px;
         }
     }
 }
+
 

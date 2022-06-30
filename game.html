@@ -32,6 +32,19 @@
             <span>Vidas: </span>
         </div>
         
+        <div id="information"></div>
+
+        <!-- onkeypress="return onlyNumber(event)"  -> la tecla que presiono tiene que ser un numero sino no se escribe
+             onpaste="return false"  -> evita la opcion de copiar, ctrl+v
+             oninput="maxLenght(this) -> corta el valor ingresado y permite borrar si me equivoco
+        -->
+        <div>
+            <input id="inputName" placeholder="Ingerse el código" type="text" name="inputNumber" onkeypress="return onlyNumber(event)" onpaste="return false" maxlength="4" oninput="maxLenght(this)">
+            <button id="check">Check</button>
+        </div>
+
+        <!-- ---------------------- CARTELES ---------------------- -->
+
         <div id="dificult">
             <input type="text" id="userName" placeholder="Ingrese Su Nombre">
             <div>
@@ -43,17 +56,6 @@
                 <button id="expertB">Experto</button>
             </div>
             <button class="tableB">Tabla de Posiciones</button>
-        </div>
-
-        <div id="information"></div>
-
-        <!-- onkeypress="return onlyNumber(event)"  -> la tecla que presiono tiene que ser un numero sino no se escribe
-             onpaste="return false"  -> evita la opcion de copiar, ctrl+v
-             oninput="maxLenght(this) -> corta el valor ingresado y permite borrar si me equivoco
-        -->
-        <div>
-            <input id="inputName" placeholder="Ingerse el código" type="text" name="inputNumber" onkeypress="return onlyNumber(event)" onpaste="return false" maxlength="4" oninput="maxLenght(this)">
-            <button id="check">Check</button>
         </div>
 
         <div id="win">
@@ -100,7 +102,7 @@
 
     </main>
     <footer>
-        <p>&copy;LaDe Design | Denise Mayra Higa</p>
+        <p>&copy;2022 LaDe Design </p>
         <a href="https://www.instagram.com/denuu.mayra/"><i class="fa-brands fa-instagram"></i></a>
         
     </footer>
