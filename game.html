@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Descifrá el Acertijo</title>
+    <link rel="stylesheet" href="./css/stylesass.css">
+    <link rel="shortcut icon" href="./assets/icon.png" type="image/x-icon">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=BIZ+UDGothic:wght@400;700&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+</head>
+<body>
+
+    <main id="main">
+        <a href="./index.html"><button type="button" id="exit">Exit</button></a>
+        
+        <div id="description">
+            <p>En este juego tenés que hallar el código de seguridad de 4 Dígitos Distintos</p>
+        </div>
+
+        <div id="printLives">
+            <span>Vidas: </span>
+        </div>
+        
+        <div id="dificult">
+            <input type="text" id="userName" placeholder="Ingrese Su Nombre">
+            <div>
+                <p>Seleccione la dificultad</p>
+            </div>
+            <div id="difButon">
+                <button id="easyB">Facil</button>
+                <button id="dificultB">Difcil</button>
+                <button id="expertB">Experto</button>
+            </div>
+            <button class="tableB">Tabla de Posiciones</button>
+        </div>
+
+        <div id="information"></div>
+
+        <!-- onkeypress="return onlyNumber(event)"  -> la tecla que presiono tiene que ser un numero sino no se escribe
+             onpaste="return false"  -> evita la opcion de copiar, ctrl+v
+             oninput="maxLenght(this) -> corta el valor ingresado y permite borrar si me equivoco
+        -->
+        <div>
+            <input id="inputName" placeholder="Ingerse el código" type="text" name="inputNumber" onkeypress="return onlyNumber(event)" onpaste="return false" maxlength="4" oninput="maxLenght(this)">
+            <button id="check">Check</button>
+        </div>
+
+        <div id="win">
+            <p>Felicidades!</p>
+            <div>
+                <button id="againW">Volver a Jugar</button>
+                <a href="./index.html"><button>Inicio</button></a>
+                <button class="tableB">Tabla de Posiciones</button>
+            </div>
+        </div>
+        <div id="lost">
+            <p>Perdiste!</p>
+            <div style="display: flex;">
+                <p>El numero correcto era:  </p><span id="correctNum"></span>
+            </div>
+            <div>
+                <button id="againL">Volver a Jugar</button>
+                <a href="./index.html"><button>Inicio</button></a>
+            </div>
+        </div>
+
+
+        <div id="tableContainer">
+            <h1>Tabla de Posiciones</h1>
+            <div id="table">
+                <table class="table table-dark table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Tiempo</th>
+                        <th scope="col">Intentos</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tbody"></tbody>
+                </table>
+            </div>
+            
+            <div>
+                <a href="./index.html"><button>Inicio</button></a>
+                <button id="Back">Volver</button>
+            </div>
+        </div>
+
+    </main>
+    <footer>
+        <p>&copy;LaDe Design | Denise Mayra Higa</p>
+        <a href="https://www.instagram.com/denuu.mayra/"><i class="fa-brands fa-instagram"></i></a>
+        
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+   
+    <script src="./js/estilox.js"></script>
+</body>
+</html>
