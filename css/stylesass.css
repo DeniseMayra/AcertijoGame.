@@ -4,7 +4,66 @@
 
 body {
   width: 100%; }
-  body #navBox {
+  body #navbox {
+    height: 60px;
+    background-color: #11151c;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-family: "BIZ UDGothic", sans-serif; }
+    @media screen and (max-width: 320px) {
+      body #navbox {
+        height: 40px; } }
+    body #navbox #logUser {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start; }
+      body #navbox #logUser #userPhoto {
+        margin: 0 20px 0 25px; }
+        @media screen and (max-width: 540px) {
+          body #navbox #logUser #userPhoto {
+            margin: 0 7px 0 1px; } }
+        body #navbox #logUser #userPhoto img {
+          border-radius: 50%;
+          max-width: 40px; }
+          @media screen and (max-width: 320px) {
+            body #navbox #logUser #userPhoto img {
+              max-width: 30px; } }
+      body #navbox #logUser #userName {
+        margin-right: 20px;
+        font-size: 15px;
+        color: #f8f9fa; }
+        @media screen and (max-width: 540px) {
+          body #navbox #logUser #userName {
+            font-size: 12px; } }
+        @media screen and (max-width: 320px) {
+          body #navbox #logUser #userName {
+            font-size: 10px; } }
+    body #navbox button {
+      padding: 9px 30px;
+      font-family: "BIZ UDGothic", sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      background-color: #11151c;
+      border-color: solid f8f9fa;
+      color: #f8f9fa;
+      border-width: 2px;
+      border-radius: 35px;
+      transition: 1s; }
+      @media screen and (max-width: 540px) {
+        body #navbox button {
+          font-size: 13px;
+          padding: 3px 20px; } }
+      @media screen and (max-width: 320px) {
+        body #navbox button {
+          font-size: 12px;
+          padding: 2px 10px; } }
+    body #navbox button:hover {
+      background-color: #f8f9fa;
+      color: #11151c; }
+    body #navbox #logoutB {
+      display: none; }
+  body #index {
     background-image: url("../assets/bg.jpeg");
     height: 100vh;
     background-repeat: no-repeat;
@@ -15,9 +74,9 @@ body {
     justify-content: flex-start;
     padding-left: 100px; }
     @media screen and (max-width: 320px) {
-      body #navBox {
+      body #index {
         height: 450px; } }
-    body #navBox #welcome {
+    body #index #welcome {
       color: #f8f9fa;
       font-family: "BIZ UDGothic", sans-serif;
       font-weight: 700;
@@ -26,9 +85,14 @@ body {
       display: flex;
       flex-direction: column; }
       @media screen and (max-width: 320px) {
-        body #navBox #welcome {
+        body #index #welcome {
           font-size: 20px; } }
-      body #navBox #welcome button {
+      body #index #welcome #welInfo {
+        font-size: 15px; }
+        @media screen and (max-width: 320px) {
+          body #index #welcome #welInfo {
+            font-size: 11px; } }
+      body #index #welcome button {
         margin-top: 40px;
         padding: 9px 30px;
         font-family: "BIZ UDGothic", sans-serif;
@@ -41,11 +105,11 @@ body {
         border-radius: 35px;
         transition: 1s; }
         @media screen and (max-width: 320px) {
-          body #navBox #welcome button {
+          body #index #welcome button {
             font-size: 15px;
             padding: 3px 12px;
             margin-bottom: 7px; } }
-      body #navBox #welcome button:hover {
+      body #index #welcome button:hover {
         background-color: #f8f9fa;
         color: #11151c; }
   body main {
@@ -54,7 +118,28 @@ body {
     font-weight: 400;
     background-color: #11151c;
     color: #f8f9fa;
-    position: relative; }
+    position: relative;
+    /* #exit{
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            @include buttonBlack(15px);
+
+            @include mediaQ(md){
+                top: 12px;
+                right: 12px;
+                padding: 5px 20px;
+                font-size: 15px;
+            }
+            @include mediaQ(xsm){
+                font-size: 12px;
+                padding: 2px 10px;
+            }
+        }
+        #exit:hover{
+            background-color: $white;
+            color: $black;
+        } */ }
     @media screen and (max-width: 768px) {
       body main {
         height: 100%;
@@ -66,33 +151,6 @@ body {
     @media screen and (max-width: 320px) {
       body main {
         padding: 10px 6px; } }
-    body main #exit {
-      position: absolute;
-      top: 30px;
-      right: 30px;
-      padding: 9px 30px;
-      font-family: "BIZ UDGothic", sans-serif;
-      font-size: 15px;
-      font-weight: 700;
-      background-color: #11151c;
-      border-color: solid f8f9fa;
-      color: #f8f9fa;
-      border-width: 2px;
-      border-radius: 35px;
-      transition: 1s; }
-      @media screen and (max-width: 768px) {
-        body main #exit {
-          top: 12px;
-          right: 12px;
-          padding: 5px 20px;
-          font-size: 15px; } }
-      @media screen and (max-width: 320px) {
-        body main #exit {
-          font-size: 12px;
-          padding: 2px 10px; } }
-    body main #exit:hover {
-      background-color: #f8f9fa;
-      color: #11151c; }
     body main #description {
       font-size: 23px;
       text-align: center;
@@ -233,29 +291,6 @@ body {
           font-size: 15px;
           justify-content: flex-start;
           padding-top: 100px; } }
-      body main #dificult #userName {
-        padding: 10px 5px;
-        width: 30%;
-        border: 0;
-        border-bottom: 2px solid #f8f9fa;
-        outline: none;
-        background-color: transparent;
-        color: #f8f9fa;
-        font-size: 23px;
-        font-family: "BIZ UDGothic", sans-serif;
-        text-align: center;
-        margin-bottom: 60px; }
-        @media screen and (max-width: 768px) {
-          body main #dificult #userName {
-            width: 45%; } }
-        @media screen and (max-width: 540px) {
-          body main #dificult #userName {
-            font-size: 15px;
-            margin-bottom: 20px; } }
-        @media screen and (max-width: 320px) {
-          body main #dificult #userName {
-            font-size: 12px;
-            width: 60%; } }
       body main #dificult #difButon {
         margin-top: 30px; }
         @media screen and (max-width: 540px) {

@@ -87,8 +87,74 @@ $breakpoints: ( //mapa
 body{
     width: 100%;
 
+    // ---------------- NAVBAR ----------------
+    #navbox{
+        height: 60px;
+        background-color: $black;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        font-family: $fontFam;
+
+        @include mediaQ(xsm){
+            height: 40px;
+        }
+
+        #logUser{
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+
+            #userPhoto{
+                margin: 0 20px 0 25px;
+                @include mediaQ(sm){
+                    margin: 0 7px 0 1px;
+                }
+                img{
+                    border-radius: 50%;
+                    max-width: 40px;
+
+                    @include mediaQ(xsm){
+                        max-width: 30px;
+                    }
+                }
+            } 
+            #userName{
+                margin-right: 20px;
+                font-size: 15px;
+                color: $white;
+                @include mediaQ(sm){
+                    font-size: 12px;
+                }
+                @include mediaQ(xsm){
+                    font-size: 10px;
+                }
+            }  
+        }
+        
+        button{
+            @include buttonBlack((16px));
+
+            @include mediaQ(sm){
+                font-size: 13px;
+                padding: 3px 20px;
+            }
+            @include mediaQ(xsm){
+                font-size: 12px;
+                padding: 2px 10px;
+            }
+        }
+        button:hover{
+            background-color: $white;
+            color: $black;
+        }
+        #logoutB{
+            display: none;
+        }
+    }
+
     // ---------------- INDEX.HTML ----------------
-    #navBox{
+    #index{
         background-image: url("../assets/bg.jpeg");
         height: 100vh;
         background-repeat: no-repeat;
@@ -114,6 +180,12 @@ body{
 
             @include mediaQ(xsm){
                 font-size: 20px;
+            }
+            #welInfo{
+                font-size: 15px;
+                @include mediaQ(xsm){
+                    font-size: 11px;
+                }
             }
 
             button{
@@ -154,7 +226,7 @@ body{
             padding: 10px 6px;
         }
 
-        #exit{
+        /* #exit{
             position: absolute;
             top: 30px;
             right: 30px;
@@ -174,7 +246,7 @@ body{
         #exit:hover{
             background-color: $white;
             color: $black;
-        }
+        } */
 
         #description{
             font-size: 23px;
@@ -305,22 +377,7 @@ body{
                 justify-content: flex-start;
                 padding-top: 100px;
             }
-            #userName{
-                @include inputs(30%, 23px);
-                text-align: center;
-                margin-bottom: 60px;
-                @include mediaQ(md){
-                    width: 45%;
-                }
-                @include mediaQ(sm){
-                    font-size: 15px;
-                    margin-bottom: 20px;
-                }
-                @include mediaQ(xsm){
-                    font-size: 12px;
-                    width: 60%;
-                }
-            }
+            
             #difButon{
                 margin-top: 30px;
 

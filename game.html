@@ -20,9 +20,19 @@
 
 </head>
 <body>
+    <!-- corregir el input  -->
+    <div id="navbox">
+        <div id="logUser">
+            <div id="userPhoto"></div>
+            <div id="userName"></div>
+            <button id="loginB">LogIn</button>
+            <button id="logoutB">LogOut</button> 
+        </div>
+        
+        <a href="./index.html"><button type="button" id="exit">Exit</button></a>
+    </div>
 
     <main id="main">
-        <a href="./index.html"><button type="button" id="exit">Exit</button></a>
         
         <div id="description">
             <p>En este juego tenés que hallar el código de seguridad de 4 Dígitos Distintos</p>
@@ -34,25 +44,21 @@
         
         <div id="information"></div>
 
-        <!-- onkeypress="return onlyNumber(event)"  -> la tecla que presiono tiene que ser un numero sino no se escribe
-             onpaste="return false"  -> evita la opcion de copiar, ctrl+v
-             oninput="maxLenght(this) -> corta el valor ingresado y permite borrar si me equivoco
-        -->
         <div>
-            <input id="inputName" placeholder="Ingerse el código" type="text" name="inputNumber" onkeypress="return onlyNumber(event)" onpaste="return false" maxlength="4" oninput="maxLenght(this)">
+            <input id="inputName" placeholder="Ingrese el código" type="number" name="inputNumber" onkeypress="return (event.charCode >= 48 && event.charCode<=57 || event.charCode==8)" onpaste="return false" >
             <button id="check">Check</button>
         </div>
 
         <!-- ---------------------- CARTELES ---------------------- -->
 
         <div id="dificult">
-            <input type="text" id="userName" placeholder="Ingrese Su Nombre">
             <div>
                 <p>Seleccione la dificultad</p>
+                <p>No olvides acceder a tu usuario para poder competir</p>
             </div>
             <div id="difButon">
-                <button id="easyB">Facil</button>
-                <button id="dificultB">Difcil</button>
+                <button id="easyB">Fácil</button>
+                <button id="dificultB">Dificil</button>
                 <button id="expertB">Experto</button>
             </div>
             <button class="tableB">Tabla de Posiciones</button>
@@ -107,8 +113,10 @@
         
     </footer>
 
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
    
-    <script src="./js/estilox.js"></script>
+    <script type="module" src="./js/estilox.js"></script>
+
 </body>
 </html>

@@ -1,11 +1,24 @@
+
+import {saveWin, getWinners} from './firebase.js';
+import { login, logout} from './firebase.js';
+
+// --------------------------- AUTENTICACION VARIABLES ---------------------------
+
+const loginB = document.getElementById('loginB');
+const logoutB = document.getElementById('logoutB');
+
+const userP = document.getElementById('userPhoto');
+const userN = document.getElementById('userName');
+
+let currentUser=undefined
+
+// --------------------------- VARIABLES ---------------------------
 let correct=[]
 let lives = 0
 let start = 0
 let end = 0
 let time = 0
-let userName
 let intentos =0
-let winners = []
 let winner = false
 
 // --------------------------- RANDOM ---------------------------
@@ -25,10 +38,10 @@ function randomNum(){
         }
         i++
     }
-    //console.log(correct)
+    console.log(correct)
 }
 
-// --------------------------- DIFICULTAD ---------------------------
+// --------------------------- DEFINIR BOTONES ---------------------------
 document.getElementById('againW').addEventListener('click', againFn);
 document.getElementById('againL').addEventListener('click', againFn);
 
@@ -43,13 +56,19 @@ document.getElementById("expertB").addEventListener('click', expertF);
 
 document.getElementById("Back").addEventListener('click', hideTable);
 
-let dificultScreen = document.getElementById('dificult')
-let userNameInp = document.getElementById('userName')
+const dificultScreen = document.getElementById('dificult')
+
+const winScreen = document.getElementById('win')
+const lostScreen = document.getElementById('lost')
+
+const tableCont = document.getElementById('tableContainer')
+
+// --------------------------- REINICIO ---------------------------
 
 function againFn(){
     dificultScreen.style.display='flex'
-    document.getElementById('win').style.display='none'
-    document.getElementById('lost').style.display='none'
+    winScreen.style.display='none'
+    lostScreen.style.display='none'
 
     // limpio todo lo que use
     let items = document.getElementsByClassName('item')
@@ -72,16 +91,16 @@ function againFn(){
     start = 0
     end = 0
     time = 0
-    userName = ""
     intentos = 0
     winner = false
 }
+
+// --------------------------- DIFICULTAD ---------------------------
 
 function easyF(){
     randomNum()
     start = Date.now()
     lives = 15;
-    userName = userNameInp.value
     // imprimo los corazones 
     dificultScreen.style.display='none'
     for(let i=0;i<15; i=i+1){
@@ -95,7 +114,6 @@ function difF(){
     randomNum()
     start = Date.now()
     lives = 10;
-    userName = userNameInp.value
 
     dificultScreen.style.display='none'
     for(let i=0;i<10; i=i+1){
@@ -109,7 +127,6 @@ function expertF(){
     randomNum()
     start = Date.now()
     lives = 5;
-    userName = userNameInp.value
 
     dificultScreen.style.display='none'
     for(let i=0;i<5; i=i+1){
@@ -120,13 +137,16 @@ function expertF(){
     }
 }
 
-function showTable(){
+async function showTable(){
+    const winners = await getWinners()
+    insertHTML(winners)
+
     dificultScreen.style.display='none'
-    document.getElementById('tableContainer').style.display='flex'
+    tableCont.style.display='flex'
 }
 function hideTable(){
     dificultScreen.style.display='flex'
-    document.getElementById('tableContainer').style.display='none'
+    tableCont.style.display='none'
 }
 
 // --------------------------- GAME OVER ---------------------------
@@ -135,35 +155,42 @@ function youWin(){
     dificultScreen.style.display ='none'
 
     //imprimo el tiempo que tardo
-    time = end - start
-    sec = Math.floor(time/1000)
-    min = Math.floor(time/60000)
-    hour = 0
+    let time = end - start
+    let sec = Math.floor(time/1000)
+    let min = 0
+    let hour = 0
+    while(sec>60){
+        min++
+        sec-=60
+    }
     while(min>60){
         hour++
         min-=60
     }
-    let winContainer = document.getElementById('win')
     let paragh = document.createElement("p")
     paragh.id = 'winCartel'
     paragh.innerHTML = `Ganaste el Juego en ${hour}:${min}:${sec}`
-    winContainer.prepend(paragh)
+    winScreen.prepend(paragh)
      
-    winContainer.style.display='flex'   //muestro cartel
+    winScreen.style.display='flex'   //muestro cartel
     
-    // guardo nueva fila en local storage
-    let win = {
-        name: userName,
-        totalTime: time,
-        intento: intentos
+    // guardo nueva fila en base de datos
+    if(currentUser != undefined){
+        let win = {
+            email: currentUser.email,
+            name: currentUser.displayName,
+            totalTime: time,
+            intento: intentos
+        }
+        saveWin(win) 
     }
-    winners.push(win)
+   /*  winners.push(win)
     let jsonwin = JSON.stringify(winners)
     localStorage.setItem('winners', jsonwin)
-    insertHTML()
+    insertHTML() */
 }
 function youLose(){
-    document.getElementById('lost').style.display='flex'
+    lostScreen.style.display='flex'
     // imprimo el numero correcto 
     let num = correct.join("")  //join para concatenar el array con "" entre medio
     let correctNumber = document.getElementById('correctNum')
@@ -193,6 +220,7 @@ function analyze(num){
         end = Date.now()
         youWin()
     }else{
+        const container = document.getElementById('information')
         if(right==0 && wrong==0){
             let item = document.createElement("div")
             item.className = "item"
@@ -200,7 +228,6 @@ function analyze(num){
                                 <div class="codeInf">
                                     <p>Ninguno es Correcto </p>
                                 </div>`
-            let container = document.getElementById('information')
             container.appendChild(item)
         }else{
             let item = document.createElement("div")
@@ -210,7 +237,6 @@ function analyze(num){
                                     <p>Números Correctos y Bien Posicionados: ${right}</p>
                                     <p>Números Correctos Pero Mal Posicionados: ${wrong} </p>
                                 </div>`
-            let container = document.getElementById('information')
             container.appendChild(item)
         }
         lives--
@@ -224,26 +250,14 @@ function analyze(num){
 }
 
 // --------------------------- VALIDA INPUT ---------------------------
-function onlyNumber(e){
-    key = e.keyCode || e.which
-    keyboard = String.fromCharCode(key)
-    number = "0123456789"
-    special = "8-37-38-46"
-    keyboardSpecial = false
-    for(var i in special){
-        if(key==special[i]){
-            keyboardSpecial=true;
-        }
+
+let inputNum = document.getElementById('inputName')
+inputNum.addEventListener('input', function(){
+    if(this.value.length > 4){
+        this.value = this.value.slice(0,3)
     }
-    if(number.indexOf(keyboard) == -1 && !keyboardSpecial){
-        return false;
-    }
-}
-function maxLenght(e){
-    if(e.value.lenght > e.maxLenght){
-        e.value = e.value.slice(0,e.maxLenght)
-    }
-}
+})
+
 document.getElementById('check').addEventListener('click', validate)
 
 function validate(){
@@ -271,7 +285,7 @@ function validate(){
 }
 
 // --------------------------- LOCAL STORAGE ---------------------------
-function insertHTML(){
+function insertHTML(winners){
     // ordena el array de totalTime menor a mayor
     let winnersOrd = winners.sort((c1,c2) => (c1.totalTime>c2.totalTime) ? 1 : (c1.totalTime<c2.totalTime) ? -1 :0)
 
@@ -284,15 +298,18 @@ function insertHTML(){
     }
 
     winnersOrd.map(win => {
-        time = win.totalTime
-        sec = Math.floor(time/1000)
-        min = Math.floor(time/60000)
-        hour = 0
-        id++
+        let sec = Math.floor(win.totalTime/1000)
+        let min = 0
+        let hour = 0
+        while(sec>60){
+            min++
+            sec-=60
+        }
         while(min>60){
             hour++
             min-=60
         }
+        id++
         let tr = document.createElement('tr')
         tr.innerHTML = `<th scope="row">${id}</th>
             <td>${win.name}</td>
@@ -300,13 +317,45 @@ function insertHTML(){
             <td>${win.intento}</td>
         `
         tBody.appendChild(tr)
-    })
+    }) 
 }
 //cuando se refresca la pagina vuelve a analizar el local storage
-window.onload = function(){
+/* window.onload = function(){
     let storageData = JSON.parse(localStorage.getItem('winners'))
     if(storageData){
         winners = storageData
         insertHTML()
     }
+} */
+
+// --------------------------- AUTENTICACION ---------------------------
+
+loginB.addEventListener('click', async() => {
+    try{
+        currentUser = await login()
+        insertUser()
+        loginB.style.display = 'none'
+        logoutB.style.display = 'block'
+    }catch(error){
+        console.log(error)
+    }
+})
+ 
+logoutB.addEventListener('click', async() => {
+    logout()
+    currentUser = undefined
+    loginB.style.display = 'block'
+    logoutB.style.display = 'none'
+    userP.removeChild(userP.lastElementChild)
+    userN.removeChild(userN.lastElementChild)
+})
+
+function insertUser(){
+    let img = document.createElement('img')
+    img.src = `${currentUser.photoURL}`
+    userP.appendChild(img)
+
+    let nam = document.createElement('p')
+    nam.innerHTML = `${currentUser.displayName}`
+    userN.appendChild(nam)
 }
