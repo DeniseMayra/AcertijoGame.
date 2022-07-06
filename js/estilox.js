@@ -1,4 +1,5 @@
-
+//import "dotenv/config";    //tira el error Los módulos relativos especificados deben comenzar con “./”, “../” o “/”.
+//import "../node_modules/dotenv/config.js"   //Uncaught ReferenceError: require is not defined en config.js
 import {saveWin, getWinners} from './firebase.js';
 import { login, logout} from './firebase.js';
 
@@ -38,7 +39,6 @@ function randomNum(){
         }
         i++
     }
-    console.log(correct)
 }
 
 // --------------------------- DEFINIR BOTONES ---------------------------

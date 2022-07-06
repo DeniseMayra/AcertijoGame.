@@ -1,14 +1,19 @@
-// Import the functions you need from the SDKs you need
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.4/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.8.4/firebase-analytics.js";
 import { getFirestore,collection, addDoc, getDocs, doc, getDoc, setDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.8.4/firebase-firestore.js"
 import { GoogleAuthProvider, getAuth, signOut, signInWithPopup} from "https://www.gstatic.com/firebasejs/9.8.4/firebase-auth.js"
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+//ERROR DE MODULOS AL USAR DOTENV!!!!!
+/* const firebaseConfig = {
+  apiKey:process.env.APIKEY,
+  authDomain: process.env.AUTHDOMAIN,
+  projectId: process.env.PROJECTID,
+  storageBucket: process.env.STORAGEBUCKET,
+  messagingSenderId: process.env.MESSAFINFSENDERID,
+  appId: process.env.APPID
+}; */
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyCEdUUy5s6rKG-cfVXT4bpUL5BuFBobLy8",
   authDomain: "actgame-2c9cd.firebaseapp.com",

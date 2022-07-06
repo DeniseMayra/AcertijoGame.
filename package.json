@@ -18,5 +18,8 @@
   "hosting": {
     "site": "acertijogame",
     "public": "public"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.1"
   }
 }
