@@ -38,7 +38,6 @@ function randomNum(){
         }
         i++
     }
-    console.log(correct)
 }
 
 // --------------------------- DEFINIR BOTONES ---------------------------
