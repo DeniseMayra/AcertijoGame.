@@ -207,7 +207,7 @@ body{
 
     // ---------------- GAME.HTML ----------------
     main{
-        padding: 70px 200px;
+        padding: 30px 80px 60px 80px;
         font-family: $fontFam;
         font-weight: 400;
         background-color: $black;
@@ -216,14 +216,14 @@ body{
 
         @include mediaQ(md){
             height: 100%;
-            padding: 50px 50px;
+            padding: 20px 40px 60px 40px;
         }
         @include mediaQ(sm){
             height: 100%;
-            padding: 30px 10px;
+            padding: 2px 10px 40px 10px;
         }
         @include mediaQ(xsm){
-            padding: 10px 6px;
+            padding: 1px 6px 20px 6px;
         }
 
         /* #exit{
@@ -270,14 +270,10 @@ body{
 
         #information{
             height: 400px;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            justify-content: flex-end;
+            overflow: scroll;
             margin-bottom: 50px;
             font-size: 20px;
             font-weight: 400;
-            overflow: scroll;
 
             @include mediaQ(md){
                 margin-bottom: 30px;
@@ -292,12 +288,13 @@ body{
                 margin-bottom: 5px;
                 font-size: 11px;
                 height: 250px;
-            }
+            } 
 
             .item{
                 margin-bottom: 20px;
                 width: 100%;
                 display: flex;
+                align-items: center;
 
                 @include mediaQ(sm){
                     margin-bottom: 8px;
@@ -310,12 +307,16 @@ body{
                     width: 20%;
                     margin-right: 20px;
                     text-align: center;
-                    @include mediaQ(xsm){
-                        margin-right: 7px;
+                    @include mediaQ(sm){
+                        margin-right: 5px;
                     }
+                    
                 }
                 .codeInf{
                     width: 80%;
+                    p{
+                        margin-bottom: 2px;
+                    }
                 }
             }
         }

@@ -229,6 +229,7 @@ function analyze(num){
                                     <p>Ninguno es Correcto </p>
                                 </div>`
             container.appendChild(item)
+
         }else{
             let item = document.createElement("div")
             item.className = "item"
@@ -329,6 +330,7 @@ function insertHTML(winners){
 } */
 
 // --------------------------- AUTENTICACION ---------------------------
+
 
 loginB.addEventListener('click', async() => {
     try{
