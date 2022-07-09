@@ -118,28 +118,7 @@ body {
     font-weight: 400;
     background-color: #11151c;
     color: #f8f9fa;
-    position: relative;
-    /* #exit{
-            position: absolute;
-            top: 30px;
-            right: 30px;
-            @include buttonBlack(15px);
-
-            @include mediaQ(md){
-                top: 12px;
-                right: 12px;
-                padding: 5px 20px;
-                font-size: 15px;
-            }
-            @include mediaQ(xsm){
-                font-size: 12px;
-                padding: 2px 10px;
-            }
-        }
-        #exit:hover{
-            background-color: $white;
-            color: $black;
-        } */ }
+    position: relative; }
     @media screen and (max-width: 768px) {
       body main {
         height: 100%;

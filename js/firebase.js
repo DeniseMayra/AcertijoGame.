@@ -66,9 +66,9 @@ const auth = getAuth();
 const provider = new GoogleAuthProvider();
 
 export const login = async function login(){
-  await setPersistence(auth, browserSessionPersistence)
-  const response = await signInWithPopup(getAuth(), provider)
-  return response.user
+    const response = await signInWithPopup(getAuth(), provider)
+    return response.user
+  
 }
 
 export const logout = () => {

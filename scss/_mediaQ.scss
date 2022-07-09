@@ -1,0 +1,16 @@
+$breakpoints: ( //mapa
+    xsm: 320px,
+    sm: 540px,
+    md: 768px,
+    lg: 1024px
+);
+@mixin mediaQ($breakpoint) { 
+    @if map-has-key($breakpoints, $breakpoint) { //analiza si el parametro esta en el mapa
+        @media screen and(max-width: map-get($breakpoints, $breakpoint)) {
+            //argumento: cada valor del mapa predefinido
+            @content;
+        }
+    }@else{
+        @warn "El valor '#{ $breakpoint}' no ha sido declarado como breakpoint"
+    }
+}
