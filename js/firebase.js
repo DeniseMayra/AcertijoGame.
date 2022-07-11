@@ -5,23 +5,23 @@ import { getFirestore,collection, addDoc, getDocs, doc, getDoc, setDoc, updateDo
 import { GoogleAuthProvider, getAuth, signOut, signInWithPopup, browserSessionPersistence, setPersistence} from "https://www.gstatic.com/firebasejs/9.8.4/firebase-auth.js"
 
 //ERROR DE MODULOS AL USAR DOTENV!!!!!
-/* const firebaseConfig = {
+const firebaseConfig = {
   apiKey:process.env.APIKEY,
   authDomain: process.env.AUTHDOMAIN,
   projectId: process.env.PROJECTID,
   storageBucket: process.env.STORAGEBUCKET,
   messagingSenderId: process.env.MESSAFINFSENDERID,
   appId: process.env.APPID
-}; */
+};
 
-const firebaseConfig = {
+/* const firebaseConfig = {
   apiKey: "AIzaSyCEdUUy5s6rKG-cfVXT4bpUL5BuFBobLy8",
   authDomain: "actgame-2c9cd.firebaseapp.com",
   projectId: "actgame-2c9cd",
   storageBucket: "actgame-2c9cd.appspot.com",
   messagingSenderId: "484033090061",
   appId: "1:484033090061:web:b7eba1d2ca9e8ddb95fb44"
-};
+}; */
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
