@@ -9,10 +9,10 @@ La diferencia entre las dificultades, son la cantidad de vidas. Otorgando 15 vid
 
 ## Tecnologías
 
-:yellow_circle: JavaScript Vanilla
-:purple_circle: Bootstrap solo para la tabla 
-:nail_care: SASS 
-:orange_circle: Firebase: Base de Datos Firestore y Autenticación.
+:yellow_circle: JavaScript Vanilla <br/>
+:purple_circle: Bootstrap solo para la tabla  <br/>
+:nail_care: SASS <br/>
+:orange_circle: Firebase: Base de Datos Firestore y Autenticación.<br/>
 
 
 
