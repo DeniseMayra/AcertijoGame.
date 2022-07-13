@@ -11,7 +11,7 @@ const logoutB = document.getElementById('logoutB');
 const userP = document.getElementById('userPhoto');
 const userN = document.getElementById('userName');
 
-let currentUser=undefined
+let currentUser=null
 
 // --------------------------- VARIABLES ---------------------------
 let correct=[]
@@ -345,7 +345,7 @@ loginB.addEventListener('click', async() => {
  
 logoutB.addEventListener('click', async() => {
     logout()
-    currentUser = undefined
+    currentUser = null
     loginB.style.display = 'block'
     logoutB.style.display = 'none'
     userP.removeChild(userP.lastElementChild)
